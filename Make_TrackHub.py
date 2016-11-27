@@ -8,7 +8,7 @@ def main():
 	args=get_args()
 
 	if len(sys.argv)<2:
-		print('Abort! Please check your input!')
+		print('Abort! You do not have any parameter input, please check your input!')
 	else:
 		# for i in range(len(sys.argv)):
 		# 	print(len(sys.argv),sys.argv[i])
