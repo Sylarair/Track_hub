@@ -10,8 +10,8 @@ def main():
 	if len(sys.argv)<2:
 		print('Abort! Please check your input!')
 	else:
-		for i in range(len(sys.argv)):
-			print(len(sys.argv),sys.argv[i])
+		# for i in range(len(sys.argv)):
+		# 	print(len(sys.argv),sys.argv[i])
 		run_process(args)
 
 
@@ -67,12 +67,6 @@ def get_args():
 	parser.add_argument('-G', '--genomes', help='genome name. (eg: mm10)', default='none')
 	parser.add_argument('-H', '--hub', help='hub name. (eg: my_sample)', default='none')
 	parser.add_argument('-O', '--output', help='output directory. (eg: my_output/)', default='none')
-	#parser.add_argument('-TT', '--tracktype', help='track type. (eg: bigWig/)', default='none')	
-	#parser.add_argument('-TN', '--trackname', help='track name, separated by \',\'. (eg: track_name1,track_name2)', default='none')
-	#parser.add_argument('-TF', '--trackfile', help='track file, separated by \',\'. (eg: track_file1.bw,track_file2.bw)', default='none')
-
-	# parser.add_argument('-SL', '--shortlabel', help='short label.', default='none')
-	# parser.add_argument('-LL', '--longlabel', help='long label.', default='none')
 	parser.add_argument('-E', '--email', help='user email.', default='none')
 	args = parser.parse_args()
 
