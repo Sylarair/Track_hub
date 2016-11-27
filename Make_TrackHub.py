@@ -67,6 +67,7 @@ def get_args():
 	parser.add_argument('-G', '--genomes', help='genome name. (eg: mm10)', default='none')
 	parser.add_argument('-H', '--hub', help='hub name. (eg: my_sample)', default='none')
 	parser.add_argument('-O', '--output', help='output directory. (eg: my_output/)', default='none')
+	parser.add_argument('-C', '--copy', help='copy file.', default='yes')
 	parser.add_argument('-E', '--email', help='user email.', default='none')
 	args = parser.parse_args()
 
@@ -86,6 +87,9 @@ def check_before_run(args):
 		return False
 	elif args.output=='none':
 		check_main_parameters('-O/--output')
+		return False
+	elif args.copy!='yes' and args.copy!='Y' and args.copy!='no' and args.copy!='N':
+		check_main_parameters('-C/--copy')
 		return False
 	else:
 		check_optional_parameters(args.email,'-E/--email')
@@ -119,8 +123,11 @@ def make_trackDb_file(path,args,input_path):
 	if not os.path.exists(Path+'/trackDb.txt'):
 		g=open(Path+'/trackDb.txt','w')
 		for line in file_list:
-			os.system('cp %s"/"%s %s' % (abs_input_path,line,Path))
-			g.write('track'+'\t'+line.strip().split('.')[0]+'\n'+'bigDataUrl'+'\t'+line+'\n'+'shortlabel'+'\t'+line.strip().split('.')[0]+'\n'+'longlabel'+'\t'+line.strip().split('.')[0]+'\n'+'type'+'\t'+line.strip().split('.')[1]+'\n'+'priority'+'\t'+str(file_list.index(line)+1)+'\n'+'\n')
+			if (args.copy=='yes' or args.copy=='Y'): 
+				os.system('cp %s"/"%s %s' % (abs_input_path,line,Path))
+				g.write('track'+'\t'+line.strip().split('.')[0]+'\n'+'bigDataUrl'+'\t'+line+'\n'+'shortlabel'+'\t'+line.strip().split('.')[0]+'\n'+'longlabel'+'\t'+line.strip().split('.')[0]+'\n'+'type'+'\t'+line.strip().split('.')[1]+'\n'+'priority'+'\t'+str(file_list.index(line)+1)+'\n'+'\n')
+			else:
+				g.write('track'+'\t'+line.strip().split('.')[0]+'\n'+'bigDataUrl'+'\t'+line+'\n'+'shortlabel'+'\t'+line.strip().split('.')[0]+'\n'+'longlabel'+'\t'+line.strip().split('.')[0]+'\n'+'type'+'\t'+line.strip().split('.')[1]+'\n'+'priority'+'\t'+str(file_list.index(line)+1)+'\n'+'\n')
 		g.close()
 	else:
 		print(Path+'/trackDb.txt already exists!')
