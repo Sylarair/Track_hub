@@ -7,9 +7,11 @@ import sys
 def main():
 	args=get_args()
 
-	if len(sys.argv)<4:
+	if len(sys.argv)<2:
 		print('Abort! Please check your input!')
 	else:
+		for i in range(len(sys.argv)):
+			print(len(sys.argv),sys.argv[i])
 		run_process(args)
 
 
