@@ -56,15 +56,10 @@ def make_dir(foldername):
 
 
 
-__version__='1.0'
 
 def get_args():
-	tool = os.path.basename(sys.argv[0])
-	author = 'Qin Wang'
-	email = 'qwang601@gmail.com'
-	date = 'Nov 26, 2016'
 
-	parser = argparse.ArgumentParser(description='\ttool:   ' + tool + ' v' + __version__ + '\n\tdate:   ' + date + '\n\tauthor: ' + author + ' (' + email + ')\n', prog=tool, formatter_class=RawTextHelpFormatter)
+	parser = argparse.ArgumentParser()
 
 	parser.add_argument('-i', '--input', help='input folder. (eg: /home/a)', default='none')
 	parser.add_argument('-G', '--genomes', help='genome name. (eg: mm10)', default='none')
